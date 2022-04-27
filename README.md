@@ -1,2 +1,2 @@
 # PasswordManager
- Password Manager program with local encrypted password storage
+(WIP) Password Manager program with local encrypted password storage
