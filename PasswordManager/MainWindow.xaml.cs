@@ -21,6 +21,7 @@ namespace PasswordManager
     public partial class MainWindow : Window
     {
         FIleController fCon = new FIleController();
+        List<Profile> curProf = new List<Profile>();
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace PasswordManager
             List<Profile> profiles = new List<Profile>();
 
             profiles = fCon.LoadFile();
+            curProf = profiles;
 
             foreach(var prof in profiles)
             {
@@ -42,7 +44,25 @@ namespace PasswordManager
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            foreach(var prof in curProf)
+            {
+                if(prof.getName() == comboBox.SelectedItem.ToString())
+                {
+                    ProfileName.Text = prof.getName();
+                    UserName.Text = prof.getUsername();
+                    Password.Text = prof.getPassword();
+                }
+            }
+        }
 
+        private void usernameCopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(UserName.Text);
+        }
+
+        private void passwordCopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(Password.Text);
         }
     }
 }

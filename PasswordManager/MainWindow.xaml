@@ -18,6 +18,17 @@
             </StackPanel>
             <StackPanel Width="600">
                 <ComboBox x:Name="comboBox" Height="29" Width="386" SelectionChanged="comboBox_SelectionChanged"/>
+                <Rectangle Height="30" Stroke="White" Width="568"/>
+                <TextBlock x:Name="ProfileNameLabel" Height="25" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Text="Profile Name" Width="150" TextAlignment="Center"/>
+                <TextBlock x:Name="ProfileName" FontSize="20" Height="30" TextWrapping="Wrap" Text="Nothing inputed yet" Width="458" TextAlignment="Center"/>
+                <Rectangle Height="30" Stroke="White" Width="568"/>
+                <TextBlock x:Name="UserNameLabel" Height="25" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Text="Username" Width="150" TextAlignment="Center"/>
+                <TextBlock x:Name="UserName" FontSize="20" Height="30" TextWrapping="Wrap" Text="Nothing inputed yet" Width="458" TextAlignment="Center"/>
+                <Button x:Name="usernameCopyButton" Content="Copy to Clipboard" Height="25" Width="130" FontWeight="Bold" Click="usernameCopyButton_Click"/>
+                <Rectangle Height="30" Stroke="White" Width="568"/>
+                <TextBlock x:Name="PasswordLabel" Height="25" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Text="Password" Width="150" TextAlignment="Center"/>
+                <TextBlock x:Name="Password" FontSize="20" Height="30" TextWrapping="Wrap" Text="Nothing inputed yet" Width="458" TextAlignment="Center"/>
+                <Button x:Name="passwordCopyButton" Content="Copy to Clipboard" Height="25" Width="130" FontWeight="Bold" Click="passwordCopyButton_Click"/>
             </StackPanel>
         </DockPanel>
 
