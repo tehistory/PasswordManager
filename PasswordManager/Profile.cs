@@ -19,5 +19,18 @@ namespace PasswordManager
             _username = username;
             _password = password;
         }
+
+        public string getName()
+        {
+            return _name;
+        }
+        public string getUsername()
+        {
+            return _username;
+        }
+        public string getPassword()
+        {
+            return _password;
+        }
     }
 }

@@ -20,9 +20,29 @@ namespace PasswordManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        FIleController fCon = new FIleController();
         public MainWindow()
         {
             InitializeComponent();
+            initProfile();
+        }
+
+        public void initProfile()
+        {
+            
+            List<Profile> profiles = new List<Profile>();
+
+            profiles = fCon.LoadFile();
+
+            foreach(var prof in profiles)
+            {
+                comboBox.Items.Add(prof.getName());
+            }
+        }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

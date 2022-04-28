@@ -16,7 +16,9 @@
                 <Rectangle Height="100" Stroke="White" Width="182"/>
                 <Button x:Name="Exportbutton" Content="Export/Import Passwords" Height="30" Width="180"/>
             </StackPanel>
-            <StackPanel Width="600"/>
+            <StackPanel Width="600">
+                <ComboBox x:Name="comboBox" Height="29" Width="386" SelectionChanged="comboBox_SelectionChanged"/>
+            </StackPanel>
         </DockPanel>
 
     </Grid>
