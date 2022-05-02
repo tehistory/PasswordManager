@@ -28,6 +28,7 @@ namespace PasswordManager
         {
             //create file, encrypt with password
             //goto mainwindow
+            DialogResult = true;
         }
     }
 }

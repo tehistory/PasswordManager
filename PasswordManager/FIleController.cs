@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
+using System.Windows;
 
 namespace PasswordManager
 {
@@ -17,12 +18,17 @@ namespace PasswordManager
         //encryption salt ~ temp value
         private string _salt = "salt";
         //password protected string
-        private string _password { get; set; }
+        private string _password;
         //file name and location
         private string _file = "..\\protectedPasswordFile.pw";
         //storage of profiles
         List<Profile> storedProfiles;
         //
+        //password setting
+        public void setPassword(string pass)
+        {
+            _password = pass;
+        }
         //file checking method
         public bool CheckFile()
         {
@@ -47,58 +53,81 @@ namespace PasswordManager
         {
             File.Create(_file);
         }
+        //file deletion method
+        public void DeleteFile()
+        {
+            File.Delete(_file);
+        }
         //file load method
         public List<Profile> LoadFile()
         {
-            List<Profile> outList = new List<Profile>();
-
-            StreamReader sReader = new StreamReader(_file);
-            var outstream = sReader.ReadToEnd();
-
-            var rgb = new Rfc2898DeriveBytes(_password, Encoding.Unicode.GetBytes(_salt));
-            var algorithm = new AesManaged();
-            var rgbKey = rgb.GetBytes(algorithm.KeySize / 8);
-            var rgbIV = rgb.GetBytes(algorithm.BlockSize / 8);
-
-            var bufferStream = new MemoryStream();
-
-            var decryptor = algorithm.CreateDecryptor(rgbKey, rgbIV);
-
-            var cryptoStream = new CryptoStream(bufferStream, decryptor, CryptoStreamMode.Read);
-
-            var bytesToTransform = Encoding.Unicode.GetBytes(outstream);
-            cryptoStream.Write(bytesToTransform, 0, bytesToTransform.Length);
-            cryptoStream.FlushFinalBlock();
-
-            var outputString = Encoding.Unicode.GetString(bytesToTransform);
-
-            cryptoStream.Close();
-            bufferStream.Close();
-            sReader.Close();
-
-            String[] ProfileArray = outputString.Split(',');
-
             try
             {
-                for (int i = 0; i < ProfileArray.Length; i = i + 3)
+                List<Profile> outList = new List<Profile>();
+
+                StreamReader sReader = new StreamReader(_file);
+                var outstream = sReader.ReadToEnd();
+                sReader.Close();
+
+                var rgb = new Rfc2898DeriveBytes(_password, Encoding.Unicode.GetBytes(_salt));
+                var algorithm = new AesManaged();
+                var rgbKey = rgb.GetBytes(algorithm.KeySize / 8);
+                var rgbIV = rgb.GetBytes(algorithm.BlockSize / 8);
+
+                var bufferStream = new MemoryStream();
+
+                var decryptor = algorithm.CreateDecryptor(rgbKey, rgbIV);
+
+                var cryptoStream = new CryptoStream(bufferStream, decryptor, CryptoStreamMode.Write);
+
+                var bytesToTransform = Encoding.Unicode.GetBytes(outstream);
+                cryptoStream.Write(bytesToTransform, 0, bytesToTransform.Length);
+                cryptoStream.FlushFinalBlock();
+
+                var outputString = Encoding.Unicode.GetString(bytesToTransform);
+
+                cryptoStream.Close();
+                bufferStream.Close();
+
+                String[] ProfileArray = outputString.Split(',');
+
+                try
                 {
-                    Profile tempProf = new Profile(ProfileArray[i], ProfileArray[i + 1], ProfileArray[i + 2]);
-                    outList.Add(tempProf);
+                    for (int i = 0; i < ProfileArray.Length; i = i + 3)
+                    {
+                        Profile tempProf = new Profile(ProfileArray[i], ProfileArray[i + 1], ProfileArray[i + 2]);
+                        outList.Add(tempProf);
+                    }
                 }
+                catch (Exception e)
+                {
+
+                }
+
+                storedProfiles = outList;
+                return outList;
+
             }catch(Exception e)
             {
-                
+                MessageBox.Show(e.Message, "LoadFileError", MessageBoxButton.OK);
+                return null;
             }
-
-            storedProfiles = outList;
-            return outList;
         }
         //add profile method
-        public async void AddProfile(Profile newProf)
+        public async Task AddProfile(Profile newProf)
         {
             var exProfs = LoadFile();
-
-            exProfs.Add(newProf);
+            if (exProfs == null)
+            {
+                List<Profile> outList = new List<Profile>();
+                outList.Add(newProf);
+                exProfs = outList;
+            }
+            else
+            {
+                exProfs.Add(newProf);
+            }
+            
 
             await SaveProfiles(exProfs);
         }
