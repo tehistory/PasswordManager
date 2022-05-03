@@ -65,9 +65,22 @@ namespace PasswordManager
             {
                 List<Profile> outList = new List<Profile>();
 
-                StreamReader sReader = new StreamReader(_file);
-                var outstream = sReader.ReadToEnd();
+                BinaryReader sReader = new BinaryReader(new FileStream(_file, FileMode.Open));
+                
+                List<byte> outstream = new List<byte>();
+                try
+                {
+                    while (true)
+                    {
+                        outstream.Add(sReader.ReadByte());
+                    }
+                }catch(Exception e)
+                {
+
+                }
                 sReader.Close();
+
+                byte[] bytesToTransform = outstream.ToArray();
 
                 var rgb = new Rfc2898DeriveBytes(_password, Encoding.Unicode.GetBytes(_salt));
                 var algorithm = new AesManaged();
@@ -82,15 +95,14 @@ namespace PasswordManager
 
                 var cryptoStream = new CryptoStream(bufferStream, decryptor, CryptoStreamMode.Write);
 
-                var bytesToTransform = Encoding.Unicode.GetBytes(outstream);
                 cryptoStream.Write(bytesToTransform, 0, bytesToTransform.Length);
                 cryptoStream.FlushFinalBlock();
 
                 bufferStream.Position = 0;
                 var transformedBytes = bufferStream.ToArray();
-
+                
                 var outputString = Encoding.Unicode.GetString(transformedBytes);
-
+                
                 cryptoStream.Close();
                 bufferStream.Close();
 
@@ -115,6 +127,7 @@ namespace PasswordManager
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message + "\nYou may have entered in the wrong password", "LoadFileError", MessageBoxButton.OK);
+                
                 return null;
             }
         }
@@ -191,12 +204,12 @@ namespace PasswordManager
             cryptoStream.Write(bytesToTransform, 0, bytesToTransform.Length);
             cryptoStream.FlushFinalBlock();
 
-            bufferStream.Position = 0;
-            var transformedBytes = bufferStream.ToArray();
-
-            StreamWriter sWriter = new StreamWriter(_file);
+            //bufferStream.Position = 0;
+            File.Delete(_file);
+            BinaryWriter sWriter = new BinaryWriter(new FileStream(_file, FileMode.CreateNew));
             
-            sWriter.Write(Encoding.Unicode.GetChars(transformedBytes));
+            sWriter.Write(bufferStream.ToArray());
+            sWriter.Flush();
 
             cryptoStream.Close();
             bufferStream.Close();
