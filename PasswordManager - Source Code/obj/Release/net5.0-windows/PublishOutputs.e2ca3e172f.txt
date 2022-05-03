@@ -1,0 +1,5 @@
+E:\GitVault\PasswordManager\PasswordManager\bin\Release\net5.0-windows\publish\PasswordManager.exe
+E:\GitVault\PasswordManager\PasswordManager\bin\Release\net5.0-windows\publish\PasswordManager.dll
+E:\GitVault\PasswordManager\PasswordManager\bin\Release\net5.0-windows\publish\PasswordManager.deps.json
+E:\GitVault\PasswordManager\PasswordManager\bin\Release\net5.0-windows\publish\PasswordManager.runtimeconfig.json
+E:\GitVault\PasswordManager\PasswordManager\bin\Release\net5.0-windows\publish\PasswordManager.pdb
