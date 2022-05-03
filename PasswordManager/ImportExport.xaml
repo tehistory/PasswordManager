@@ -1,0 +1,17 @@
+﻿<Window x:Class="PasswordManager.ImportExport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PasswordManager"
+        mc:Ignorable="d"
+        Title="ImportExport" Height="400" Width="700">
+    <Grid>
+        <Label x:Name="ExportLabel" Content="Export Path:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Height="42" Margin="30,23,0,0" VerticalAlignment="Top" Width="159"/>
+        <TextBox x:Name="exportTextBox" FontSize="18" HorizontalAlignment="Left" Height="53" Margin="30,57,0,0" TextWrapping="Wrap" Text="File Path to save an un-encrypted password file at" VerticalAlignment="Top" Width="637"/>
+        <Button x:Name="ExportButton" Content="Export" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Height="42" Margin="0,115,0,0" VerticalAlignment="Top" Width="212" Click="ExportButton_Click"/>
+        <Label x:Name="ImportLabel" Content="Import Path:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Height="37" Margin="30,206,0,0" VerticalAlignment="Top" Width="159"/>
+        <TextBox x:Name="importTextBox" FontSize="18" HorizontalAlignment="Left" Height="53" Margin="30,243,0,0" TextWrapping="Wrap" Text="File Path to an un-encrypted password file to import" VerticalAlignment="Top" Width="614"/>
+        <Button x:Name="ImportButton" Content="Import" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Height="42" Margin="0,301,0,0" VerticalAlignment="Top" Width="212" Click="ImportButton_Click"/>
+    </Grid>
+</Window>

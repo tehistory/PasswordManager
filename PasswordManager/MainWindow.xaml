@@ -14,7 +14,7 @@
                 <Rectangle Height="100" Stroke="White" Width="182"/>
                 <Button x:Name="Deletebutton" Content="DeleteFile" Height="30" Width="180" Click="Deletebutton_Click"/>
                 <Rectangle Height="100" Stroke="White" Width="182"/>
-                <Button x:Name="Exportbutton" Content="Export/Import Passwords" Height="30" Width="180"/>
+                <Button x:Name="Exportbutton" Content="Export/Import Passwords" Height="30" Width="180" Click="Exportbutton_Click"/>
             </StackPanel>
             <StackPanel Width="600">
                 <ComboBox x:Name="comboBox" Height="29" Width="386" SelectionChanged="comboBox_SelectionChanged"/>
@@ -29,6 +29,8 @@
                 <TextBlock x:Name="PasswordLabel" Height="25" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Text="Password" Width="150" TextAlignment="Center"/>
                 <TextBlock x:Name="Password" FontSize="20" Height="30" TextWrapping="Wrap" Text="Nothing inputed yet" Width="458" TextAlignment="Center"/>
                 <Button x:Name="passwordCopyButton" Content="Copy to Clipboard" Height="25" Width="130" FontWeight="Bold" Click="passwordCopyButton_Click"/>
+                <Rectangle Height="30" Stroke="White" Width="568"/>
+                <Button x:Name="deleteButton" Content="Delete Profile" FontWeight="Bold" Height="36" Width="121" Click="deleteButton_Click_1"/>
             </StackPanel>
         </DockPanel>
 

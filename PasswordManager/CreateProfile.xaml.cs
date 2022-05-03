@@ -30,41 +30,41 @@ namespace PasswordManager
             char[] lowLetterCharRef = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
             char[] upLetterCharRef = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
             char[] numberCharRef = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-            char[] specialCharRef = new char[] { '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-','_','=','+','`','~',',','<','>','.','/','?' };
+            char[] specialCharRef = new char[] { '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-','_','=','+','`','~','<','>','.','/','?' };
             string outPass = "";
 
             int x = rng.Next(lowLetterCharRef.Length);
-            outPass.Append(lowLetterCharRef[x]);
+            outPass = lowLetterCharRef[x].ToString();
             x = rng.Next(upLetterCharRef.Length);
-            outPass.Append(upLetterCharRef[x]);
+            outPass = outPass + upLetterCharRef[x].ToString();
             x = rng.Next(numberCharRef.Length);
-            outPass.Append(numberCharRef[x]);
+            outPass = outPass + numberCharRef[x].ToString();
             x = rng.Next(specialCharRef.Length);
-            outPass.Append(specialCharRef[x]);
+            outPass = outPass + specialCharRef[x].ToString();
 
-            for (int i = 4; i < 16; i++)
+            for (int i = 1; i <= 16; i++)
             {
-                int z = rng.Next(4);
+                int z = rng.Next(5);
 
-                if(z < 1)
+                if(z <= 1)
                 {
-                    int y = rng.Next(lowLetterCharRef.Length);
-                    outPass.Append(lowLetterCharRef[y]);
+                    x = rng.Next(lowLetterCharRef.Length);
+                    outPass = outPass +lowLetterCharRef[x].ToString();
                 }
-                else if(z < 2)
+                else if(z <= 2)
                 {
-                    int y = rng.Next(upLetterCharRef.Length);
-                    outPass.Append(upLetterCharRef[y]);
+                    x = rng.Next(upLetterCharRef.Length);
+                    outPass = outPass + upLetterCharRef[x].ToString();
                 }
-                else if(z < 3)
+                else if(z <= 3)
                 {
-                    int y = rng.Next(numberCharRef.Length);
-                    outPass.Append(numberCharRef[y]);
+                    x = rng.Next(numberCharRef.Length);
+                    outPass = outPass + numberCharRef[x].ToString();
                 }
-                else if(z < 4)
+                else
                 {
-                    int y = rng.Next(specialCharRef.Length);
-                    outPass.Append(specialCharRef[y]);
+                    x = rng.Next(specialCharRef.Length);
+                    outPass = outPass + specialCharRef[x].ToString();
                 }
             }
 

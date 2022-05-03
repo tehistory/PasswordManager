@@ -64,14 +64,22 @@ namespace PasswordManager
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach(var prof in curProf)
+            try
             {
-                if(prof.getName() == comboBox.SelectedItem.ToString())
+                foreach (var prof in curProf)
                 {
-                    ProfileName.Text = prof.getName();
-                    UserName.Text = prof.getUsername();
-                    Password.Text = prof.getPassword();
+                    if (prof.getName() == comboBox.SelectedItem.ToString())
+                    {
+                        ProfileName.Text = prof.getName();
+                        UserName.Text = prof.getUsername();
+                        Password.Text = prof.getPassword();
+                    }
                 }
+            }catch(Exception nullE)
+            {
+                ProfileName.Text = "no value";
+                UserName.Text = "no value";
+                Password.Text = "no value";
             }
         }
 
@@ -106,6 +114,7 @@ namespace PasswordManager
             if(result == MessageBoxResult.Yes)
             {
                 fCon.DeleteFile();
+                initProfile();
             }
         }
 
@@ -114,6 +123,9 @@ namespace PasswordManager
             List<Profile> profiles = new List<Profile>();
 
             profiles = fCon.LoadFile();
+
+            comboBox.Items.Clear();
+
             if (profiles != null)
             {
                 curProf = profiles;
@@ -123,6 +135,50 @@ namespace PasswordManager
                     comboBox.Items.Add(prof.getName());
                 }
             }
+        }
+
+        private void Exportbutton_Click(object sender, RoutedEventArgs e)
+        {
+            ImportExport PopUp = new ImportExport();
+
+            if(PopUp.ShowDialog() == true)
+            {
+                if (PopUp.importBool == true)
+                {
+                    fCon.ImportFile(PopUp.importTextBox.Text.ToString());
+                    RefreshProf();
+                }
+                else
+                {
+                    fCon.ExportFile(PopUp.exportTextBox.Text.ToString());
+                }
+            }
+        }
+
+        private async void deleteButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (comboBox.SelectedItem != null) {
+                Profile delProf = null;
+                foreach(var prof in curProf)
+                {
+                    if(prof.getName() == comboBox.SelectedItem.ToString())
+                    {
+                        delProf = prof;
+                    }
+                }
+                await fCon.DeleteProfile(delProf, curProf);
+                RefreshProf();
+                try
+                {
+                    comboBox.SelectedValue = comboBox.Items[0];
+                }catch(Exception outofIndex)
+                {
+                    ProfileName.Text = "no value";
+                    UserName.Text = "no value";
+                    Password.Text = "no value";
+                }
+            }
+            
         }
     }
 }

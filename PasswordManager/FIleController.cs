@@ -71,6 +71,8 @@ namespace PasswordManager
 
                 var rgb = new Rfc2898DeriveBytes(_password, Encoding.Unicode.GetBytes(_salt));
                 var algorithm = new AesManaged();
+                algorithm.BlockSize = 128;
+                algorithm.KeySize = 128;
                 var rgbKey = rgb.GetBytes(algorithm.KeySize / 8);
                 var rgbIV = rgb.GetBytes(algorithm.BlockSize / 8);
 
@@ -84,7 +86,10 @@ namespace PasswordManager
                 cryptoStream.Write(bytesToTransform, 0, bytesToTransform.Length);
                 cryptoStream.FlushFinalBlock();
 
-                var outputString = Encoding.Unicode.GetString(bytesToTransform);
+                bufferStream.Position = 0;
+                var transformedBytes = bufferStream.ToArray();
+
+                var outputString = Encoding.Unicode.GetString(transformedBytes);
 
                 cryptoStream.Close();
                 bufferStream.Close();
@@ -109,7 +114,7 @@ namespace PasswordManager
 
             }catch(Exception e)
             {
-                MessageBox.Show(e.Message, "LoadFileError", MessageBoxButton.OK);
+                MessageBox.Show(e.Message + "\nYou may have entered in the wrong password", "LoadFileError", MessageBoxButton.OK);
                 return null;
             }
         }
@@ -131,18 +136,48 @@ namespace PasswordManager
 
             await SaveProfiles(exProfs);
         }
+        //deletes profile from file
+        public async Task DeleteProfile(Profile delProf, List<Profile> curProf)
+        {
+            List<Profile> tempProf = curProf;
+
+            if (!tempProf.Remove(delProf))
+            {
+                foreach (var prof in curProf)
+                {
+                    if (prof.getName() == delProf.getName())
+                    {
+                        tempProf.Remove(prof);
+                        break;
+                    }
+                }
+            }
+
+            await SaveProfiles(tempProf);
+        }
         //save profile list to file
         public async Task SaveProfiles(List<Profile> inProf)
         {
             string outstring = "";
+            int i = 0;
 
             foreach(var prof in inProf)
             {
-                outstring = outstring + prof.getName() + ',' + prof.getUsername() + ',' + prof.getPassword() + ',';
+                if (i == 0)
+                {
+                    outstring = outstring + prof.getName() + ',' + prof.getUsername() + ',' + prof.getPassword();
+                }
+                else
+                {
+                    outstring = outstring + ',' + prof.getName() + ',' + prof.getUsername() + ',' + prof.getPassword();
+                }
+                i++;
             }
 
             var rgb = new Rfc2898DeriveBytes(_password, Encoding.Unicode.GetBytes(_salt));
             var algorithm = new AesManaged();
+            algorithm.BlockSize = 128;
+            algorithm.KeySize = 128;
             var rgbKey = rgb.GetBytes(algorithm.KeySize / 8);
             var rgbIV = rgb.GetBytes(algorithm.BlockSize / 8);
 
@@ -156,15 +191,92 @@ namespace PasswordManager
             cryptoStream.Write(bytesToTransform, 0, bytesToTransform.Length);
             cryptoStream.FlushFinalBlock();
 
-            StreamWriter sWriter = new StreamWriter(_file);
+            bufferStream.Position = 0;
+            var transformedBytes = bufferStream.ToArray();
 
-            sWriter.Write(bytesToTransform);
+            StreamWriter sWriter = new StreamWriter(_file);
+            
+            sWriter.Write(Encoding.Unicode.GetChars(transformedBytes));
 
             cryptoStream.Close();
             bufferStream.Close();
             sWriter.Close();
         }
-        //
-        //
+        //export unencrypted file
+        public void ExportFile(string filepath)
+        {
+            string exFile = "\\unencryptedPasswordFile.pw";
+            File.Create(filepath + exFile);
+            StreamWriter sWriter = new StreamWriter(filepath + exFile);
+            try
+            {
+                var profList = LoadFile();
+
+                string outstring = "";
+
+                foreach (var prof in profList)
+                {
+                    outstring = outstring + prof.getName() + ',' + prof.getUsername() + ',' + prof.getPassword() + ',';
+                }
+
+                sWriter.Write(outstring);
+                sWriter.Flush();
+                sWriter.Close();
+            }catch(Exception e)
+            {
+                sWriter.Flush();
+                sWriter.Close();
+                File.Delete(filepath + exFile);
+                MessageBox.Show(e.Message);
+            }
+        }
+        //import unencrypted file
+        public void ImportFile(string filepath)
+        {
+            try
+            {
+                List<Profile> outList = new List<Profile>();
+
+                StreamReader sReader = new StreamReader(filepath);
+
+                string passFile = sReader.ReadToEnd();
+
+                String[] ProfileArray = passFile.Split(',');
+
+                try
+                {
+                    for (int i = 0; i < ProfileArray.Length; i = i + 3)
+                    {
+                        Profile tempProf = new Profile(ProfileArray[i], ProfileArray[i + 1], ProfileArray[i + 2]);
+                        outList.Add(tempProf);
+                    }
+
+                    var exProfs = LoadFile();
+
+                    if (exProfs == null)
+                    {
+                        exProfs = outList;
+                    }
+                    else
+                    {
+                        foreach (var prof in outList)
+                        {
+                            exProfs.Add(prof);
+                        }
+                    }
+
+                    SaveProfiles(exProfs);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
     }
 }
