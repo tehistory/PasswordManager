@@ -4,5 +4,8 @@
 
 /PasswordManager - Source Code/.vs/PasswordManager/FileContentIndex
 
-/PasswordManager - Source Code/obj/*
+/PasswordManager - Source Code/obj
 
+/PasswordManager - Source Code/bin/Debug/net6.0-windows
+
+/PasswordManager - Source Code/.vs
