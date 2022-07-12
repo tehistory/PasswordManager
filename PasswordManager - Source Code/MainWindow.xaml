@@ -3,34 +3,107 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PasswordManager"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <DockPanel LastChildFill="False">
             <StackPanel Width="200" >
-                <Rectangle Height="40" Stroke="White" Width="182"/>
-                <Button x:Name="Createbutton" Content="Create New Profile" Height="30" Width="180" Click="Createbutton_Click"/>
-                <Rectangle Height="100" Stroke="White" Width="182"/>
-                <Button x:Name="Deletebutton" Content="DeleteFile" Height="30" Width="180" Click="Deletebutton_Click"/>
-                <Rectangle Height="100" Stroke="White" Width="182"/>
-                <Button x:Name="Exportbutton" Content="Export/Import Passwords" Height="30" Width="180" Click="Exportbutton_Click"/>
+                <Rectangle Height="40" Width="182"
+                           Stroke="White" />
+
+                <Button x:Name="Createbutton" 
+                        Content="Create New Profile" 
+                        Height="30" Width="180" 
+                        Click="Createbutton_Click"/>
+
+                <Rectangle Height="100" Width="182"
+                           Stroke="White" />
+
+                <Button x:Name="Deletebutton" 
+                        Content="DeleteFile" 
+                        Height="30" Width="180" 
+                        Click="Deletebutton_Click"/>
+
+                <Rectangle Height="100" Width="182"
+                           Stroke="White" />
+
+                <Button x:Name="Exportbutton" 
+                        Content="Export/Import Passwords" 
+                        Height="30" Width="180" 
+                        Click="Exportbutton_Click"/>
+
             </StackPanel>
             <StackPanel Width="600">
-                <ComboBox x:Name="comboBox" Height="29" Width="386" SelectionChanged="comboBox_SelectionChanged"/>
-                <Rectangle Height="30" Stroke="White" Width="568"/>
-                <TextBlock x:Name="ProfileNameLabel" Height="25" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Text="Profile Name" Width="150" TextAlignment="Center"/>
-                <TextBlock x:Name="ProfileName" FontSize="20" Height="30" TextWrapping="Wrap" Text="Nothing inputed yet" Width="458" TextAlignment="Center"/>
-                <Rectangle Height="30" Stroke="White" Width="568"/>
-                <TextBlock x:Name="UserNameLabel" Height="25" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Text="Username" Width="150" TextAlignment="Center"/>
-                <TextBlock x:Name="UserName" FontSize="20" Height="30" TextWrapping="Wrap" Text="Nothing inputed yet" Width="458" TextAlignment="Center"/>
-                <Button x:Name="usernameCopyButton" Content="Copy to Clipboard" Height="25" Width="130" FontWeight="Bold" Click="usernameCopyButton_Click"/>
-                <Rectangle Height="30" Stroke="White" Width="568"/>
-                <TextBlock x:Name="PasswordLabel" Height="25" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" Text="Password" Width="150" TextAlignment="Center"/>
-                <TextBlock x:Name="Password" FontSize="20" Height="30" TextWrapping="Wrap" Text="Nothing inputed yet" Width="458" TextAlignment="Center"/>
-                <Button x:Name="passwordCopyButton" Content="Copy to Clipboard" Height="25" Width="130" FontWeight="Bold" Click="passwordCopyButton_Click"/>
-                <Rectangle Height="30" Stroke="White" Width="568"/>
-                <Button x:Name="deleteButton" Content="Delete Profile" FontWeight="Bold" Height="36" Width="121" Click="deleteButton_Click_1"/>
+                <ComboBox x:Name="comboBox" 
+                          Height="29" Width="386" 
+                          SelectionChanged="comboBox_SelectionChanged"/>
+
+                <Rectangle Height="30" Width="568"
+                           Stroke="White" />
+
+                <TextBlock x:Name="ProfileNameLabel" 
+                           Text="Profile Name"
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           Height="25" Width="150"
+                           FontWeight="Bold" FontSize="20"/>
+
+                <TextBlock x:Name="ProfileName" 
+                           Text="Nothing inputed yet"
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           FontSize="20" 
+                           Height="30" Width="458" />
+
+                <Rectangle Height="30"  Width="568"
+                           Stroke="White"/>
+
+                <TextBlock x:Name="UserNameLabel" 
+                           Text="Username" 
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           Height="25" Width="150"
+                           FontWeight="Bold" FontSize="20"/>
+
+                <TextBlock x:Name="UserName" 
+                           Text="Nothing inputed yet"
+                           TextWrapping="Wrap" TextAlignment="Center" 
+                           FontSize="20" 
+                           Height="30" Width="458"/>
+
+                <Button x:Name="usernameCopyButton" 
+                        Content="Copy to Clipboard" 
+                        Height="25" Width="130" 
+                        FontWeight="Bold" 
+                        Click="usernameCopyButton_Click"/>
+
+                <Rectangle Height="30"  Width="568"
+                           Stroke="White"/>
+
+                <TextBlock x:Name="PasswordLabel" 
+                           Text="Password"
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           Height="25" Width="150"
+                           FontWeight="Bold" FontSize="20"/>
+
+                <TextBlock x:Name="Password" 
+                           Text="Nothing inputed yet"
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           FontSize="20" 
+                           Height="30" Width="458"/>
+
+                <Button x:Name="passwordCopyButton" 
+                        Content="Copy to Clipboard" 
+                        Height="25" Width="130" 
+                        FontWeight="Bold" 
+                        Click="passwordCopyButton_Click"/>
+
+                <Rectangle Height="30" Width="568"
+                           Stroke="White"/>
+
+                <Button x:Name="deleteButton" 
+                        Content="Delete Profile" 
+                        FontWeight="Bold" 
+                        Height="36" Width="121" 
+                        Click="deleteButton_Click_1"/>
+
             </StackPanel>
         </DockPanel>
 

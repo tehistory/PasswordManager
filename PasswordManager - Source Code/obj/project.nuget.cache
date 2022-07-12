@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/5A2WDs5VgJ9D534+ULrFI8LROHbBcAoTkQT5BLPRfK5LMEO3tK+2vbKsITouYaX6ktYsSBth0326MJrztEIXQ==",
+  "dgSpecHash": "g1j1Dj8gJpTZJkDUdse8BnvDwghNakPuraAi2JRrzdbO4yjKRYTwQu1ktBCKWacuma9B/EmlzqetoReKEwx/9g==",
   "success": true,
   "projectFilePath": "C:\\xsource\\passwordManagerRepo\\PasswordManager\\PasswordManager - Source Code\\PasswordManager.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\fegelhoff\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512",
-    "C:\\Users\\fegelhoff\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\fegelhoff\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\fegelhoff\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
