@@ -1,6 +1,6 @@
 ﻿namespace PasswordManager.Contracts
 {
-    internal class Profile
+    public class Profile
     {
         //website name, username, password
         public string Name { get; private set; }

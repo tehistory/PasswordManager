@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordManager.Contracts
+namespace PasswordManager.Client
 {
-    public class SingleStreamFile
+    internal class PasswordPageViewModel
     {
-        public string FileContents;
     }
 }

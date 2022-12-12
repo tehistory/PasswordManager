@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="PasswordManager.Client.FilePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+>
+  <UserControl.Resources>
+      
+  </UserControl.Resources>
+    <Grid>
+        <Button Content="Choose a File"
+                Height="20px" Width="100px"
+                Margin="100,100,100,100"
+                Click="ChooseFile_Clicked"/>
+
+        <Button Content="Create a new File"
+                Height="20px" Width="100px"
+                Margin="100,100,100,100"
+                Click="CreateFile_Clicked"/>
+    </Grid>
+</UserControl>

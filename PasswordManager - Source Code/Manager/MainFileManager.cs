@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordManager.Contracts
+namespace PasswordManager.Manager
 {
-    public class SingleStreamFile
+    internal class MainFileManager
     {
-        public string FileContents;
     }
 }
