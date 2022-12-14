@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using System.Windows;
+using System.Windows.Input;
 
 namespace PasswordManager.Client
 {
     
-    public partial class FilePicker : ContentView
+    public partial class FilePicker : Window
     {
         public FilePicker()
         {
