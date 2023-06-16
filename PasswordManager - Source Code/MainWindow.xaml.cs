@@ -57,13 +57,13 @@ namespace PasswordManager
         {
             try
             {
-                foreach (var prof in curProf)
+                foreach (Profile prof in curProf)
                 {
-                    if (prof.getName() == comboBox.SelectedItem.ToString())
+                    if (prof.Name == comboBox.SelectedItem.ToString())
                     {
-                        ProfileName.Text = prof.getName();
-                        UserName.Text = prof.getUsername();
-                        Password.Text = prof.getPassword();
+                        ProfileName.Text = prof.Name;
+                        UserName.Text = prof.Username;
+                        Password.Text = prof.Password;
                     }
                 }
             }catch(Exception nullE)
@@ -123,7 +123,7 @@ namespace PasswordManager
 
                 foreach (var prof in profiles)
                 {
-                    comboBox.Items.Add(prof.getName());
+                    comboBox.Items.Add(prof.Name);
                 }
             }
         }
@@ -152,7 +152,7 @@ namespace PasswordManager
                 Profile delProf = null;
                 foreach(var prof in curProf)
                 {
-                    if(prof.getName() == comboBox.SelectedItem.ToString())
+                    if(prof.Name == comboBox.SelectedItem.ToString())
                     {
                         delProf = prof;
                     }

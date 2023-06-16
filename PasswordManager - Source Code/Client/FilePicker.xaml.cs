@@ -35,7 +35,7 @@ namespace PasswordManager.Client
             {
                 // Set FilePath property of FilePickerModel to selected file path
                 Vm.FileLocation = openFileDialog.FileName;
-
+                Vm.LoadFile();
             }
         }
 
@@ -60,6 +60,7 @@ namespace PasswordManager.Client
 
                 // Set FilePath property of FilePickerModel to new file path
                 Vm.FileLocation = filePath;
+                Vm.NewFile();
             }
         }
     }

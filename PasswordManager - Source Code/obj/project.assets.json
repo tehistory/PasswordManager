@@ -34,7 +34,9 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://plmstfs.penlink.com/DefaultCollection/_packaging/PLXTooling/nuget/v3/index.json": {},
+        "https://plmstfs.penlink.com/DefaultCollection/_packaging/PenLink/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
@@ -70,7 +72,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
