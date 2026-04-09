@@ -28,5 +28,14 @@ namespace PasswordManager
         {
             DialogResult = true;
         }
+
+        private void textBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                button_Click(null, null);
+                e.Handled = true;
+            }
+        }
     }
 }

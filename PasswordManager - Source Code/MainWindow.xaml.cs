@@ -30,35 +30,47 @@ namespace PasswordManager
 
         public void initProfile()
         {
-            if (fCon.CheckFile())
-            {
-                //ask for password and pass to filecontroller
-                LoginPage PopUp = new LoginPage();
+            SelectFileLocation fileLocationDialog = new SelectFileLocation();
 
-                if (PopUp.ShowDialog() == true)
+            if (fileLocationDialog.ShowDialog() == true)
+            {
+                fCon.setFileLocation(fileLocationDialog.FilePath);
+
+                if (fCon.CheckFile())
                 {
-                    fCon.setPassword(PopUp.textBox.Text);
-                    RefreshProf();
+                    //ask for password and pass to filecontroller
+                    LoginPage PopUp = new LoginPage();
+
+                    if (PopUp.ShowDialog() == true)
+                    {
+                        fCon.setPassword(PopUp.textBox.Text);
+                        RefreshProf();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
                 else
                 {
-                    this.Close();
+                    CreateFile PopUp = new CreateFile();
+
+                    if (PopUp.ShowDialog() == true)
+                    {
+                        fCon.setPassword(PopUp.textBox.Text);
+                        fCon.setFileLocation(PopUp.fileLocationTextBox.Text);
+                        fCon.CreateFile();
+                        RefreshProf();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
             }
             else
             {
-                CreateFile PopUp = new CreateFile();
-
-                if (PopUp.ShowDialog() == true)
-                {
-                    fCon.setPassword(PopUp.textBox.Text);
-                    fCon.CreateFile();
-                }
-                else
-                {
-                    this.Close();
-                }
-
+                this.Close();
             }
         }
 

@@ -29,6 +29,11 @@ namespace PasswordManager
         {
             _password = pass;
         }
+        //file location setting
+        public void setFileLocation(string fileLocation)
+        {
+            _file = fileLocation;
+        }
         //file checking method
         public bool CheckFile()
         {
@@ -83,9 +88,11 @@ namespace PasswordManager
                 byte[] bytesToTransform = outstream.ToArray();
 
                 var rgb = new Rfc2898DeriveBytes(_password, Encoding.Unicode.GetBytes(_salt));
-                var algorithm = new AesManaged();
-                algorithm.BlockSize = 128;
-                algorithm.KeySize = 128;
+                var algorithm = new AesManaged
+                {
+                    BlockSize = 128,
+                    KeySize = 128
+                };
                 var rgbKey = rgb.GetBytes(algorithm.KeySize / 8);
                 var rgbIV = rgb.GetBytes(algorithm.BlockSize / 8);
 
